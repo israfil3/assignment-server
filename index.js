@@ -9,9 +9,7 @@ app.use(cors())
 app.use(express.json())
 
 
-
-
-const uri = "mongodb+srv://assignment-31:oeFvzIPcgcF63DZY@cluster0.qygdymi.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.qygdymi.mongodb.net/?retryWrites=true&w=majority`;
 
 
 const client = new MongoClient(uri, {
@@ -37,6 +35,7 @@ async function run() {
         const result = await cursor.toArray()
         res.send(result)
     })
+
     
     app.get('/college/:id', async (req, res) => {
         const onCollage = req.params.id;
@@ -90,15 +89,6 @@ async function run() {
         const result = await cursor.toArray()
         res.send(result)
      })
-
-
-
-
-
-
-
-
-
 
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
