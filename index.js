@@ -23,14 +23,14 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
 
-    await client.connect();
+    // await client.connect();
     const collegeCollection = client.db('allCollege').collection('college');
     const subCollegeCollection = client.db('allCollege').collection('subCollege');
     const admissionCollection = client.db('allCollege').collection('admission');
     const ratingCollection = client.db('allCollege').collection('rating');
 
 
-    app.get('/college',async(req, res) => {
+    app.get('/college', async (req, res) => {
         const cursor  = collegeCollection.find()
         const result = await cursor.toArray()
         res.send(result)
@@ -98,8 +98,6 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
-
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
